@@ -1,0 +1,30 @@
+object Quotes{
+    var lista = mutableListOf("Nie czekaj. Czas nigdy nie będzie idealny",
+        "Każdy dzień to nowa szansa.",
+        "Sukces to suma małych wysiłków powtarzanych dzień po dniu."
+        )
+    fun getRandomQuote(){
+        var x = Random.nextInt(lista.size)
+        println(lista[x])
+    }
+    fun addQuote(){
+        println("Podaj cytat który chcesz dodać: ")
+        var cytat = readln()
+        lista.add(cytat)
+    }
+}
+fun main(){
+    while(true) {
+        println("Co chcesz zrobić? 1-Wylosować cytat 2-Dodać cytat: ")
+        var wybor = readln().toInt()
+        if (wybor == 1) {
+            Quotes.getRandomQuote()
+            break
+        } else if (wybor == 2) {
+            Quotes.addQuote()
+        } else {
+            println("Błąd")
+            break
+        }
+    }
+}
