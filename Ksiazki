@@ -1,0 +1,105 @@
+import kotlin.random.Random
+
+data class Book(val title: String, val author: String, val year: Int)
+
+class BookManager {
+    private val books = mutableListOf<Book>()
+
+    // Dodawanie nowej książki
+    fun addBook(book: Book) {
+        books.add(book)
+        println("Książka '${book.title}' została dodana do listy.")
+    }
+
+    // Filtrowanie książek według autora
+    fun filterByAuthor(author: String): List<Book> {
+        return books.filter { it.author.equals(author, ignoreCase = true) }
+    }
+
+    // Filtrowanie książek według roku wydania
+    fun filterByYear(year: Int): List<Book> {
+        return books.filter { it.year == year }
+    }
+
+    // Sortowanie książek alfabetycznie po tytule
+    fun sortBooksByTitle(): List<Book> {
+        return books.sortedBy { it.title }
+    }
+
+    // Wyświetlanie wszystkich książek
+    fun displayBooks() {
+        if (books.isEmpty()) {
+            println("Brak książek w liście.")
+        } else {
+            println("Lista książek:")
+            books.forEach { println("${it.title} - ${it.author} (${it.year})") }
+        }
+    }
+}
+
+fun main() {
+    val bookManager = BookManager()
+    var continueRunning = true
+
+    while (continueRunning) {
+        println("\nMenu:")
+        println("1. Dodaj nową książkę")
+        println("2. Wyświetl wszystkie książki")
+        println("3. Filtruj książki według autora")
+        println("4. Filtruj książki według roku wydania")
+        println("5. Sortuj książki alfabetycznie po tytule")
+        println("0. Zakończ program")
+        print("Wybierz opcję: ")
+
+        val choice = readLine()?.toIntOrNull()
+
+        when (choice) {
+            1 -> {
+                print("Podaj tytuł książki: ")
+                val title = readLine() ?: ""
+                print("Podaj autora książki: ")
+                val author = readLine() ?: ""
+                print("Podaj rok wydania książki: ")
+                val year = readLine()?.toIntOrNull() ?: 0
+                bookManager.addBook(Book(title, author, year))
+            }
+            2 -> bookManager.displayBooks()
+            3 -> {
+                print("Podaj nazwisko autora: ")
+                val author = readLine() ?: ""
+                val filteredBooks = bookManager.filterByAuthor(author)
+                if (filteredBooks.isNotEmpty()) {
+                    println("Książki autorstwa '$author':")
+                    filteredBooks.forEach { println(it.title) }
+                } else {
+                    println("Brak książek autorstwa '$author'.")
+                }
+            }
+            4 -> {
+                print("Podaj rok wydania: ")
+                val year = readLine()?.toIntOrNull()
+                if (year != null) {
+                    val filteredBooks = bookManager.filterByYear(year)
+                    if (filteredBooks.isNotEmpty()) {
+                        println("Książki wydane w roku $year:")
+                        filteredBooks.forEach { println(it.title) }
+                    } else {
+                        println("Brak książek wydanych w roku $year.")
+                    }
+                } else {
+                    println("Niepoprawny rok.")
+                }
+            }
+            5 -> {
+                val sortedBooks = bookManager.sortBooksByTitle()
+                println("Książki posortowane alfabetycznie:")
+                sortedBooks.forEach { println(it.title) }
+            }
+            0 -> {
+                continueRunning = false
+                println("Zakończono program.")
+            }
+            else -> println("Niepoprawny wybór. Spróbuj ponownie.")
+        }
+    }
+}
