@@ -1,0 +1,41 @@
+package com.example.trudneaplikacje
+import kotlin.random.Random
+
+interface RollingTool{
+    fun roll()
+}
+class Coin : RollingTool{
+    override fun roll() {
+        var x = Random.nextInt(2)
+        val wynik = when (x){
+            0 -> "Orzeł"
+            1-> "Reszka"
+            else -> "Błąd"
+        }
+        println("Wylosowano $wynik")
+    }
+}
+class Dice : RollingTool{
+    override fun roll() {
+        var y = Random.nextInt(7)+1
+        println("Wylosowano $y")
+    }
+}
+
+fun main(){
+
+    println("Hello World")
+    var gra1 = Coin()
+    var gra2 = Dice()
+    println("Jak chcesz losować? 1-Rzut monetą 2-Rzut kostką: ")
+    var wybor = readln().toInt()
+    if(wybor==1){
+        gra1.roll()
+    }else if(wybor==2){
+        gra2.roll()
+    }
+    else{
+        println("Wybrałęś złą gre")
+    }
+
+}
