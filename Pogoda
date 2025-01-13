@@ -42,7 +42,7 @@ fun main() {
     }
     
     // Odczytanie wyboru użytkownika
-    print("Wprowadź numer miasta: ")
+    println("Wprowadź numer miasta: ")
     val choice = readLine()?.toIntOrNull()
 
     if (choice != null && choice in 1..cities.size) {
