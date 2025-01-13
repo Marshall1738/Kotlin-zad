@@ -1,41 +1,39 @@
 package com.example.trudneaplikacje
+
 import kotlin.random.Random
 
-interface RollingTool{
+interface RollingTool {
     fun roll()
 }
-class Coin : RollingTool{
+
+class Coin : RollingTool {
     override fun roll() {
-        var x = Random.nextInt(2)
-        val wynik = when (x){
-            0 -> "Orzeł"
-            1-> "Reszka"
-            else -> "Błąd"
-        }
-        println("Wylosowano $wynik")
-    }
-}
-class Dice : RollingTool{
-    override fun roll() {
-        var y = Random.nextInt(7)+1
-        println("Wylosowano $y")
+        val wynik = if (Random.nextInt(2) == 0) "Orzeł" else "Reszka"
+        println("Wylosowano: $wynik")
     }
 }
 
-fun main(){
+class Dice : RollingTool {
+    override fun roll() {
+        val y = Random.nextInt(1, 7)
+        println("Wylosowano: $y")
+    }
+}
 
+fun main() {
     println("Hello World")
-    var gra1 = Coin()
-    var gra2 = Dice()
-    println("Jak chcesz losować? 1-Rzut monetą 2-Rzut kostką: ")
-    var wybor = readln().toInt()
-    if(wybor==1){
-        gra1.roll()
-    }else if(wybor==2){
-        gra2.roll()
-    }
-    else{
-        println("Wybrałęś złą gre")
-    }
+    val gra1 = Coin()
+    val gra2 = Dice()
 
+    println("Jak chcesz losować? 1-Rzut monetą 2-Rzut kostką: ")
+    try {
+        val wybor = readln().toInt()
+        when (wybor) {
+            1 -> gra1.roll()
+            2 -> gra2.roll()
+            else -> println("Wybrałeś złą grę")
+        }
+    } catch (e: NumberFormatException) {
+        println("Podano niepoprawne dane. Spróbuj ponownie.")
+    }
 }
