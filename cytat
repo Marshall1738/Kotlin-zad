@@ -1,7 +1,7 @@
 object Quotes{
-    var lista = mutableListOf("Nie czekaj. Czas nigdy nie będzie idealny",
-        "Każdy dzień to nowa szansa.",
-        "Sukces to suma małych wysiłków powtarzanych dzień po dniu."
+    var lista = mutableListOf("Pan Jaroslaw jest najlpeszym nauczycielem programowania.",
+        "Wszystko co dobre szybko sie kończy.",
+        "Gdyby kuzka nie skakała to by nóżki nie złamała."
         )
     fun getRandomQuote(){
         var x = Random.nextInt(lista.size)
