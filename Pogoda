@@ -1,9 +1,7 @@
-// Interfejs do reprezentacji różnych typów pogody
 interface Weather {
     fun forecast(): String
 }
 
-// Klasy reprezentujące różne typy pogody
 class Sunny : Weather {
     override fun forecast(): String {
         return "Dzisiaj jest słonecznie!"
@@ -22,11 +20,9 @@ class Cloudy : Weather {
     }
 }
 
-// Klasa danych reprezentująca miasto
 data class City(val name: String, val weather: Weather)
 
 fun main() {
-    // Tworzenie listy miast i ich prognoz pogody
     val cities = listOf(
         City("Warszawa", Sunny()),
         City("Kraków", Rainy()),
@@ -35,13 +31,11 @@ fun main() {
         City("Poznań", Rainy())
     )
 
-    // Wyświetlenie dostępnych miast
     println("Wybierz miasto z listy:")
     cities.forEachIndexed { index, city -> 
         println("${index + 1}. ${city.name}")
     }
     
-    // Odczytanie wyboru użytkownika
     println("Wprowadź numer miasta: ")
     val choice = readLine()?.toIntOrNull()
 
